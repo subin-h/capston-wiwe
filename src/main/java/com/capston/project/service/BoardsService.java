@@ -66,10 +66,19 @@ public class BoardsService {
     }
 
     @Transactional(readOnly = true)
-    public List<BoardsMainDto> findAllPage() {
+    public List<BoardsMainDto> findAllPage() { // 전체 조회
         List<Boards> boards = boardsRepository.findAll();
         List<BoardsMainDto> boardsMainDtoList = new ArrayList<>();
         boards.stream().forEach(i -> boardsMainDtoList.add(new BoardsMainDto().toDto(i)));
         return boardsMainDtoList;
     }
+
+    @Transactional(readOnly = true) // 검색
+    public List<BoardsMainDto> search(String keyword) {
+        List<Boards> boards = boardsRepository.findByBoardsTitleContaining(keyword);
+        List<BoardsMainDto> boardSimpleDtoList = new ArrayList<>();
+        boards.stream().forEach(i -> boardSimpleDtoList.add(new BoardsMainDto().toDto(i)));
+        return boardSimpleDtoList;
+    }
+
 }

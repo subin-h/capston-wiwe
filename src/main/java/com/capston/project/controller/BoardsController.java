@@ -52,4 +52,11 @@ public class BoardsController {
     public Response findAllPage() {
         return Response.success(boardsService.findAllPage());
     }
+
+    @ApiOperation(value = "게시글 검색", notes = "게시글을 검색합니다.")
+    @GetMapping("/boards/search")
+    @ResponseStatus(HttpStatus.OK)
+    public Response search(String keyword) {
+        return Response.success(boardsService.search(keyword));
+    }
 }
