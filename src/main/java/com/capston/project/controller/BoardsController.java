@@ -45,4 +45,11 @@ public class BoardsController {
         boardsService.deleteBoard(id);
         return Response.success(null);
     }
+
+    @ApiOperation(value = "게시글 목록 조회", notes = "게시글 목록을 조회합니다.")
+    @GetMapping("/boards")
+    @ResponseStatus(HttpStatus.OK)
+    public Response findAllPage() {
+        return Response.success(boardsService.findAllPage());
+    }
 }

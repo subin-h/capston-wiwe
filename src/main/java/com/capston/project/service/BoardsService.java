@@ -3,6 +3,7 @@ package com.capston.project.service;
 import com.capston.project.config.SecurityUtil;
 import com.capston.project.dto.community.BoardsCreateDto;
 import com.capston.project.dto.community.BoardsDto;
+import com.capston.project.dto.community.BoardsMainDto;
 import com.capston.project.dto.community.BoardsRequestDto;
 import com.capston.project.entity.community.Boards;
 import com.capston.project.entity.user.User;
@@ -13,6 +14,9 @@ import com.capston.project.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Service
@@ -59,5 +63,13 @@ public class BoardsService {
             throw new MemberNotFoundException();
         }
         boardsRepository.delete(boards);
+    }
+
+    @Transactional(readOnly = true)
+    public List<BoardsMainDto> findAllPage() {
+        List<Boards> boards = boardsRepository.findAll();
+        List<BoardsMainDto> boardsMainDtoList = new ArrayList<>();
+        boards.stream().forEach(i -> boardsMainDtoList.add(new BoardsMainDto().toDto(i)));
+        return boardsMainDtoList;
     }
 }
