@@ -27,6 +27,15 @@ public class BoardsService {
         return BoardsCreateDto.toDto(boards);
     }
 
+    @Transactional(readOnly = true)
+    public BoardsDto findBoards(Long id){ //게시글 단건 조회
+
+        Boards boards = boardsRepository.findById(id)
+                .orElseThrow(BoardNotFoundException::new);
+        User user = boards.getUser();
+        return BoardsDto.toDto(boards, user.getNickname());
+    }
+
     @Transactional
     public BoardsDto updateBoard (Long id, BoardsRequestDto req){ //게시글 수정
         User user = SecurityUtil.getCurrentUsername().flatMap(userRepository::findByUsername).orElse(null);

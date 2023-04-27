@@ -24,6 +24,13 @@ public class BoardsController {
         return Response.success(boardsService.createBoard(req));
     }
 
+    @ApiOperation(value = "게시글 단건 조회", notes = "게시글을 단건 조회합니다")
+    @GetMapping("/boards/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public Response findBoard(@ApiParam(value = "게시글 id", required = true) @PathVariable Long id) {
+        return Response.success(boardsService.findBoards(id));
+    }
+
     @ApiOperation(value = "게시글 수정", notes = "게시글을 수정합니다.")
     @PutMapping("/boards/{id}")
     @ResponseStatus(HttpStatus.OK)
