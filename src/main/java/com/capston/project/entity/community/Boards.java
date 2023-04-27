@@ -8,7 +8,7 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Builder
 @Getter
@@ -22,9 +22,9 @@ public class Boards extends Auditor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long boardsId;
 
-    @Column(name = "boards_title")
+    @Column(name = "boards_title", nullable = false)
     private String boardsTitle;
-    @Column(name = "boards_content")
+    @Column(name = "boards_content", nullable = false)
     private String boardsContent;
 
     @ManyToOne(fetch = FetchType.LAZY)
