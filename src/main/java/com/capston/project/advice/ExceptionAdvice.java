@@ -1,15 +1,13 @@
 package com.capston.project.advice;
 
 
+import com.capston.project.exception.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import com.capston.project.exception.LoginFailureException;
-import com.capston.project.exception.MemberNicknameAlreadyExistsException;
-import com.capston.project.exception.MemberUsernameAlreadyExistsException;
 import com.capston.project.response.Response;
 
 
@@ -58,5 +56,20 @@ public class ExceptionAdvice {
     public Response memberNicknameAlreadyExistsException(MemberNicknameAlreadyExistsException e) {
         return Response.failure(409, e.getMessage() + "은 중복된 닉네임 입니다.");
     }
+
+    // 404 응답
+    // 게시글 찾기 실패
+    @ExceptionHandler(BoardNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public Response boardNotFoundException() {
+        return Response.failure(404, "게시글을 찾을 수 없습니다.");
+    }
+
+    @ExceptionHandler(MemberNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public Response memberNotFoundException() {
+        return Response.failure(404, "요청한 회원을 찾을 수 없습니다.");
+    }
+
 
 }
