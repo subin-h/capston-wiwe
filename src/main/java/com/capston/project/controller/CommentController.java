@@ -35,10 +35,4 @@ public class CommentController {
         return Response.success(null);
     }
 
-    @ApiOperation(value = "댓글 목록 조회", notes = "댓글을 조회 합니다.")
-    @GetMapping("/comments")
-    @ResponseStatus(HttpStatus.OK)
-    public Response findAll(@Valid CommentReadBoardId commentReadBoardId) {
-        return Response.success(commentService.findCommentAll(commentReadBoardId));
-    }
 }

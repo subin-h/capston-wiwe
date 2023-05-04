@@ -33,13 +33,7 @@ public class CommentService {
     }
 
     //댓글 전체 조회
-    @Transactional(readOnly = true)
-    public List<CommentDto> findCommentAll(CommentReadBoardId req) {
-        List<Comment> commentList = commentRepository.findByBoardsBoardsId(req.getBoardsId());
-        List<CommentDto> commentDtoList = new ArrayList<>();
-        commentList.stream().forEach(i -> commentDtoList.add(new CommentDto().toDto(i)));
-        return commentDtoList;
-    }
+
 
     //댓글 작성
     @Transactional

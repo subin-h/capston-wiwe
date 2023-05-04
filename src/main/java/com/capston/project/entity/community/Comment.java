@@ -20,7 +20,7 @@ public class Comment extends Auditor {
     @Id
     @Column(name = "comment_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long commentId;
+    private Long commentId;
 
     @Column(nullable = false,name = "comment_content")
     private String commentContent;
