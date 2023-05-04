@@ -25,7 +25,7 @@ public class CommentService {
     private final UserRepository userRepository;
     private final BoardsRepository boardsRepository;
 
-    public CommentService(final CommentRepository commentRepository, final BoardsRepository boardsRepository, final UserRepository userRepository) {
+    public CommentService(final CommentRepository commentRepository, final BoardsRepository boardsRepository, final UserRepository userRepository) { //error fix
         this.commentRepository = commentRepository;
         this.boardsRepository = boardsRepository;
         this.userRepository = userRepository;
