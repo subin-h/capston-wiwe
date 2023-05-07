@@ -9,10 +9,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BoardsMainDto {
+
+    private Long boardsId;
     private String title;
     private String nickname;
 
     public BoardsMainDto toDto(Boards boards) {
-        return new BoardsMainDto(boards.getBoardsTitle(),boards.getUser().getNickname());
+        return new BoardsMainDto(boards.getBoardsId(), boards.getBoardsTitle(),boards.getUser().getNickname());
     }
 }
