@@ -3,6 +3,7 @@ package com.capston.project.service;
 import com.capston.project.config.SecurityUtil;
 import com.capston.project.dto.community.CommentCreateDto;
 import com.capston.project.dto.community.CommentDto;
+import com.capston.project.dto.community.CommentReadBoardId;
 import com.capston.project.entity.community.Boards;
 import com.capston.project.entity.community.Comment;
 import com.capston.project.entity.user.User;
@@ -15,6 +16,9 @@ import com.capston.project.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Service
@@ -43,6 +47,14 @@ public class CommentService {
             throw new MemberNotFoundException();
         }
         commentRepository.delete(comment);
+    }
+
+    @Transactional(readOnly = true)
+    public List<CommentDto> findCommentAll(CommentReadBoardId req) {
+        List<Comment> commentList = commentRepository.findByBoardsBoardsId(req.getBoardsId());
+        List<CommentDto> commentDtoList = new ArrayList<>();
+        commentList.stream().forEach(i -> commentDtoList.add(new CommentDto().toDto(i)));
+        return commentDtoList;
     }
 
 }
