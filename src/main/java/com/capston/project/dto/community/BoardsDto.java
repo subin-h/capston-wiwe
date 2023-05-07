@@ -15,15 +15,13 @@ public class BoardsDto {
     private String boardsWriter;
     private String boardsTitle;
     private String boardsContent;
-    private LocalDateTime createdAt;
 
     public static BoardsDto toDto(Boards boards, String boardsWriter) {
         return new BoardsDto(
                 boards.getBoardsId(),
                 boardsWriter,
                 boards.getBoardsTitle(),
-                boards.getBoardsContent(),
-                boards.getCreatedAt()
+                boards.getBoardsContent()
         );
     }
 }
