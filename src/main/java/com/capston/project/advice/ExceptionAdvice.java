@@ -40,6 +40,12 @@ public class ExceptionAdvice {
         return Response.failure(401, "로그인에 실패하였습니다.");
     }
 
+    @ExceptionHandler(PasswordMismatchException.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public Response passwordMismatchException() {
+        return Response.failure(401, "비밀번호가 일치하지 않습니다.");
+    }
+
 
     // 409 응답
     // username 중복
