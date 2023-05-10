@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface BoardsRepository extends JpaRepository<Boards, Long> {
     List<Boards> findByBoardsTitleContaining(String keyword);
+    List<Boards> findByUserUserId(Long userId);
 }

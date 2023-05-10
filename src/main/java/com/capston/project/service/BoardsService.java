@@ -1,11 +1,9 @@
 package com.capston.project.service;
 
 import com.capston.project.config.SecurityUtil;
-import com.capston.project.dto.community.BoardsCreateDto;
-import com.capston.project.dto.community.BoardsDto;
-import com.capston.project.dto.community.BoardsMainDto;
-import com.capston.project.dto.community.BoardsRequestDto;
+import com.capston.project.dto.community.*;
 import com.capston.project.entity.community.Boards;
+import com.capston.project.entity.community.Comment;
 import com.capston.project.entity.user.User;
 import com.capston.project.exception.MemberNotFoundException;
 import com.capston.project.exception.BoardNotFoundException;

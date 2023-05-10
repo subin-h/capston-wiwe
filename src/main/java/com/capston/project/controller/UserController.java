@@ -5,6 +5,7 @@ import com.capston.project.dto.user.DeleteRequestDto;
 import com.capston.project.dto.user.NicknameDto;
 import com.capston.project.dto.user.PasswordDto;
 import com.capston.project.response.Response;
+import com.capston.project.service.BoardsService;
 import com.capston.project.service.UserService;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -47,6 +48,20 @@ public class UserController {
     public Response deleteUser(@Valid @RequestBody DeleteRequestDto req) {
         userService.deleteUser(req);
         return Response.success(null);
+    }
+
+    @ApiOperation(value = "내가 쓴 글 조회", notes = "사용자가 작성한 게시글을 조회합니다.")
+    @GetMapping("/myBoards")
+    @ResponseStatus(HttpStatus.OK)
+    public Response myPageBoards() {
+        return Response.success(userService.myBoardsPage());
+    }
+
+    @ApiOperation(value = "내가 쓴 댓글 조회", notes = "사용자가 작성한 댓글을 조회합니다.")
+    @GetMapping("/myComment")
+    @ResponseStatus(HttpStatus.OK)
+    public Response myPageComment() {
+        return Response.success(userService.myCommentPage());
     }
 
 
