@@ -32,6 +32,13 @@ public class User extends Auditor {
 
     @Column(nullable = false, unique = true)
     private String nickname;
+    @Column(name = "checklist_sum1", nullable = true)
+    private Integer checklistSum1;
+    @Column(name = "checklist_sum2", nullable = true)
+    private Integer checklistSum2;
+    @Column(name = "checklist_sum3", nullable = true)
+    private Integer checklistSum3;
+
 
     @Enumerated(EnumType.STRING)
     private Authority authority;
