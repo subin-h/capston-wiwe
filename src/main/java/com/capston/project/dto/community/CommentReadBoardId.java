@@ -9,5 +9,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CommentReadBoardId {
 
-    private Long boardsId;
+    private Long id;
 }

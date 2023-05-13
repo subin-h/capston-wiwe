@@ -51,7 +51,7 @@ public class CommentService {
 
     @Transactional(readOnly = true)
     public List<CommentDto> findCommentAll(CommentReadBoardId req) {
-        List<Comment> commentList = commentRepository.findByBoardsBoardsId(req.getBoardsId());
+        List<Comment> commentList = commentRepository.findByBoardsBoardsId(req.getId());
         List<CommentDto> commentDtoList = new ArrayList<>();
         commentList.stream().forEach(i -> commentDtoList.add(new CommentDto().toDto(i)));
         return commentDtoList;
