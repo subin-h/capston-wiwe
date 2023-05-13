@@ -34,9 +34,9 @@ public class CommentController {
     }
 
     @ApiOperation(value = "댓글 목록 조회", notes = "댓글을 조회 합니다.")
-    @GetMapping("/comments")
+    @GetMapping("/comments/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Response findAll(@Valid CommentReadBoardId commentReadBoardId) {
-        return Response.success(commentService.findCommentAll(commentReadBoardId));
+    public Response findAll(@Valid @PathVariable Long id) {
+        return Response.success(commentService.findCommentAll(id));
     }
 }
