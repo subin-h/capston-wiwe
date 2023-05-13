@@ -21,7 +21,7 @@ public class Comment extends Auditor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long commentId;
 
-    @Column(nullable = false,name = "comment_content")
+    @Column(name = "comment_content", nullable = false)
     private String commentContent;
 
     @ManyToOne(fetch = FetchType.LAZY)
