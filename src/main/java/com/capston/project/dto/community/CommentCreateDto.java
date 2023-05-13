@@ -10,7 +10,7 @@ import javax.validation.constraints.NotBlank;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CommentCreateDto {
-    @NotBlank
+
     private Long boardsId;
     @NotBlank
     private String commentContent;
