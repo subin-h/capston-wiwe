@@ -43,7 +43,7 @@ public class UserController {
     }
 
     @ApiOperation(value = "회원 탈퇴", notes = "회원정보를 삭제합니다.")
-    @DeleteMapping("/delete")
+    @PostMapping("/delete")
     @ResponseStatus(HttpStatus.OK)
     public Response deleteUser(@Valid @RequestBody DeleteRequestDto req) {
         userService.deleteUser(req);
