@@ -71,6 +71,12 @@ public class ExceptionAdvice {
         return Response.failure(404, "게시글을 찾을 수 없습니다.");
     }
 
+    @ExceptionHandler(ChecklistNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public Response checklistNotFoundException() {
+        return Response.failure(404, "체크리스트를 찾을 수 없습니다.");
+    }
+
     @ExceptionHandler(CommentNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public Response commentNotFoundException() {
