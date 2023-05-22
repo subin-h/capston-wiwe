@@ -5,9 +5,11 @@ import com.capston.project.dto.community.*;
 import com.capston.project.entity.community.Boards;
 import com.capston.project.entity.community.Comment;
 import com.capston.project.entity.user.User;
+import com.capston.project.exception.CommentNotFoundException;
 import com.capston.project.exception.MemberNotFoundException;
 import com.capston.project.exception.BoardNotFoundException;
 import com.capston.project.repository.BoardsRepository;
+import com.capston.project.repository.CommentRepository;
 import com.capston.project.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,6 +22,7 @@ import java.util.List;
 @Service
 public class BoardsService {
     private final BoardsRepository boardsRepository;
+    private final CommentRepository commentRepository;
     private final UserRepository userRepository;
 
     @Transactional
@@ -34,6 +37,16 @@ public class BoardsService {
 
         Boards boards = boardsRepository.findById(id)
                 .orElseThrow(BoardNotFoundException::new);
+        User user = boards.getUser();
+        return BoardsDto.toDto(boards, user.getNickname());
+    }
+
+    @Transactional(readOnly = true)
+    public BoardsDto findBoards2(Long id){ //댓글 관련 게시글 단건 조회
+        Comment comment = commentRepository.findById(id).orElseThrow(CommentNotFoundException::new);
+        Long boardsIdCheck;
+        boardsIdCheck = comment.getBoards().getBoardsId();
+        Boards boards = boardsRepository.findById(boardsIdCheck).orElseThrow(BoardNotFoundException::new);
         User user = boards.getUser();
         return BoardsDto.toDto(boards, user.getNickname());
     }

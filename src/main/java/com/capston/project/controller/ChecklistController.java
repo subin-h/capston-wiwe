@@ -38,4 +38,11 @@ public class ChecklistController {
     public Response change3(@Valid @RequestBody ChecklistSum3RequestDto req) {
         return Response.success(checklistService.updateChecklist3(req));
     }
+
+    @ApiOperation(value = "체크리스트 결과", notes = "체크리스트 결과를 조회합니다.")
+    @GetMapping("/result")
+    @ResponseStatus(HttpStatus.OK)
+    public Response checklistResult() {
+        return Response.success(checklistService.getResult());
+    }
 }

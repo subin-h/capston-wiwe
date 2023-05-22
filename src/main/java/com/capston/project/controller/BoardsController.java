@@ -31,6 +31,13 @@ public class BoardsController {
         return Response.success(boardsService.findBoards(id));
     }
 
+    @ApiOperation(value = "댓글 관련 게시글 단건 조회", notes = "댓글이 매핑된 게시글을 단건 조회합니다")
+    @GetMapping("comment/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public Response findBoard2(@ApiParam(value = "게시글 id", required = true) @PathVariable Long id) {
+        return Response.success(boardsService.findBoards2(id));
+    }
+
     @ApiOperation(value = "게시글 수정", notes = "게시글을 수정합니다.")
     @PutMapping("/boards/{id}")
     @ResponseStatus(HttpStatus.OK)
