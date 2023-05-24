@@ -90,5 +90,11 @@ public class ExceptionAdvice {
         return Response.failure(404, "요청한 회원을 찾을 수 없습니다.");
     }
 
+    @ExceptionHandler(MemoNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public Response memoNotFoundException() {
+        return Response.failure(404, "요청한 메모를 찾을 수 없습니다.");
+    }
+
 
 }

@@ -11,6 +11,7 @@ import com.capston.project.entity.memo.Memo;
 import com.capston.project.entity.user.User;
 import com.capston.project.exception.BoardNotFoundException;
 import com.capston.project.exception.MemberNotFoundException;
+import com.capston.project.exception.MemoNotFoundException;
 import com.capston.project.repository.MemoRepository;
 import com.capston.project.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -50,6 +51,17 @@ public class MemoService {
         return memoMainDtoList;
     }
 
+    @Transactional(readOnly = true)
+    public List<MemoMainDto> findCalendarMemo(CalendarRequestDto req) { // 메모 날짜별 조회
+        User user = SecurityUtil.getCurrentUsername().flatMap(userRepository::findByUsername).orElse(null);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime memoDate2 = LocalDateTime.parse(req.getMemoDate() + " 00:00:00", formatter);
+        List<Memo> memo = memoRepository.findByUserUserIdAndMemoDate(user.getUserId(), memoDate2);
+        List<MemoMainDto> memoMainDtoList = new ArrayList<>();
+        memo.stream().forEach(i -> memoMainDtoList.add(new MemoMainDto().toDto(i)));
+        return memoMainDtoList;
+    }
+
     @Transactional
     public void deleteMemo(Long id) { //메모 삭제
         Memo memo = memoRepository.findById(id).orElseThrow(BoardNotFoundException::new);
@@ -65,7 +77,7 @@ public class MemoService {
     public MemoResponseDto updateMemo (Long id, MemoUpdateDto req){ //메모 수정
         User user = SecurityUtil.getCurrentUsername().flatMap(userRepository::findByUsername).orElse(null);
         Memo memo = memoRepository.findById(id)
-                .orElseThrow(BoardNotFoundException::new);
+                .orElseThrow(MemoNotFoundException::new);
         if(user != memo.getUser()) {
             throw new MemberNotFoundException();
         }
@@ -80,7 +92,7 @@ public class MemoService {
     public MemoResponseDto singleMemoFind(Long id){ //메모 단건 조회
 
         Memo memo = memoRepository.findById(id)
-                .orElseThrow(BoardNotFoundException::new);
+                .orElseThrow(MemoNotFoundException::new);
         return MemoResponseDto.toDto(memo);
     }
 
