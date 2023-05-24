@@ -13,10 +13,14 @@ import lombok.NoArgsConstructor;
 public class ChecklistResponseDto {
 
     private String result;
+    private String result2;
+    private String result3;
 
     public static ChecklistResponseDto toDto(ResultInfo resultInfo) {
         return new ChecklistResponseDto(
-                resultInfo.getResult()
+                resultInfo.getResult(),
+                resultInfo.getResult2(),
+                resultInfo.getResult3()
         );
     }
 }

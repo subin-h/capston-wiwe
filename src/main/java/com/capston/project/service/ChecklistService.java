@@ -1,10 +1,7 @@
 package com.capston.project.service;
 
 import com.capston.project.config.SecurityUtil;
-import com.capston.project.dto.checklist.ChecklistResponseDto;
-import com.capston.project.dto.checklist.ChecklistSum1RequestDto;
-import com.capston.project.dto.checklist.ChecklistSum2RequestDto;
-import com.capston.project.dto.checklist.ChecklistSum3RequestDto;
+import com.capston.project.dto.checklist.*;
 import com.capston.project.dto.user.UserDto;
 import com.capston.project.entity.checklist.ResultInfo;
 import com.capston.project.entity.user.User;
@@ -12,6 +9,7 @@ import com.capston.project.exception.ChecklistNotFoundException;
 import com.capston.project.repository.ResultInfoRepository;
 import com.capston.project.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.aspectj.weaver.tools.cache.CacheKeyResolver;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,34 +21,87 @@ public class ChecklistService {
     private final ResultInfoRepository resultInfoRepository;
 
     @Transactional
-    public UserDto updateChecklist1(ChecklistSum1RequestDto req) {
+    public UserDto updateChecklist1(ChecklistSum1RequestDto req) { //checklist1 갱신
         User user = SecurityUtil.getCurrentUsername().flatMap(userRepository::findByUsername).orElse(null);
         user.setChecklistSum1(req.getChecklistSum1());
         return UserDto.from(userRepository.save(user));
     }
 
     @Transactional
-    public UserDto updateChecklist2(ChecklistSum2RequestDto req) {
+    public ChecklistSingleResponseDto resultChecklist1(){ //checklist1 단일 결과 출력
+        User user = SecurityUtil.getCurrentUsername().flatMap(userRepository::findByUsername).orElse(null);
+        Integer checklistNumber1 = user.getChecklistSum1();
+        String resultString;
+        if(checklistNumber1 != null) {
+            if (checklistNumber1 >= 16) {
+                resultString = "위험";
+            } else if (checklistNumber1 >= 8) {
+                resultString = "중증";
+            } else if (checklistNumber1 >= 5)
+                resultString = "경미";
+            else
+                resultString = "안전";
+        }
+        else throw new ChecklistNotFoundException();
+        return ChecklistSingleResponseDto.toDto(resultString);
+    }
+
+    @Transactional
+    public UserDto updateChecklist2(ChecklistSum2RequestDto req) { //checklist2 갱신
         User user = SecurityUtil.getCurrentUsername().flatMap(userRepository::findByUsername).orElse(null);
         user.setChecklistSum2(req.getChecklistSum2());
         return UserDto.from(userRepository.save(user));
     }
 
     @Transactional
-    public UserDto updateChecklist3(ChecklistSum3RequestDto req) {
+    public ChecklistSingleResponseDto resultChecklist2(){ //checklist2 단일 결과 출력
+        User user = SecurityUtil.getCurrentUsername().flatMap(userRepository::findByUsername).orElse(null);
+        Integer checklistNumber2 = user.getChecklistSum2();
+        String resultString;
+        if(checklistNumber2 != null) {
+            if (checklistNumber2 >= 7) {
+                resultString = "위험";
+            } else if (checklistNumber2 >= 4) {
+                resultString = "경미";
+            }else
+                resultString = "안전";
+        }
+        else throw new ChecklistNotFoundException();
+        return ChecklistSingleResponseDto.toDto(resultString);
+    }
+
+    @Transactional
+    public UserDto updateChecklist3(ChecklistSum3RequestDto req) { //checklist3 갱신
         User user = SecurityUtil.getCurrentUsername().flatMap(userRepository::findByUsername).orElse(null);
         user.setChecklistSum3(req.getChecklistSum3());
         return UserDto.from(userRepository.save(user));
     }
 
     @Transactional
-    public ChecklistResponseDto getResult(){
+    public ChecklistSingleResponseDto resultChecklist3() { //checklist3 단일 결과 출력
+        User user = SecurityUtil.getCurrentUsername().flatMap(userRepository::findByUsername).orElse(null);
+        Integer checklistNumber3 = user.getChecklistSum3();
+        String resultString;
+        if (checklistNumber3 != null) {
+            if (checklistNumber3 >= 10)
+                resultString = "위험";
+            else if (checklistNumber3 >= 5)
+                resultString = "경미";
+            else
+                resultString = "안전";
+        }
+        else throw new ChecklistNotFoundException();
+        return ChecklistSingleResponseDto.toDto(resultString);
+    }
+
+    @Transactional
+    public ChecklistResponseDto getResult(){ //전체 체크리스트 결과 출력
         ResultInfo resultInfo = resultInfoRepository.findById(resultChecklist()).orElseThrow(ChecklistNotFoundException::new);
         return ChecklistResponseDto.toDto(resultInfo);
     }
 
     @Transactional
-    public Long resultChecklist(){
+    public Long resultChecklist(){ // 결과 id 매칭
         User user = SecurityUtil.getCurrentUsername().flatMap(userRepository::findByUsername).orElse(null);
         Long checkNumber;
         Integer resultCheck1 = user.getChecklistSum1();
@@ -96,6 +147,4 @@ public class ChecklistService {
 
         return checkNumber;
     }
-
-
 }
