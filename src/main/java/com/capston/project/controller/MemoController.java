@@ -59,7 +59,7 @@ public class MemoController {
     }
 
     @ApiOperation(value = "날짜별 내가 쓴 메모 목록 조회", notes = "날빠졀로 내가 쓴 메모 목록을 조회합니다.")
-    @GetMapping("/memo/calendar")
+    @PostMapping("/memo/calendar")
     @ResponseStatus(HttpStatus.OK)
     public Response findDateMemo(@Valid @RequestBody CalendarRequestDto req) {
         return Response.success(memoService.findCalendarMemo(req));
