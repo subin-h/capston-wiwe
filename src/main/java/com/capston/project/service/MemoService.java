@@ -38,7 +38,7 @@ public class MemoService {
         LocalDateTime memoDate = LocalDateTime.parse(req.getMemoDate() + " 00:00:00", formatter);
 
         User user = SecurityUtil.getCurrentUsername().flatMap(userRepository::findByUsername).orElse(null);
-        Memo memo = memoRepository.save(new Memo(req.getMemoTitle(), req.getMemoContent1(),req.getMemoContent1(),memoDate, user));
+        Memo memo = memoRepository.save(new Memo(req.getMemoTitle(), req.getMemoContent1(),req.getMemoContent2(),memoDate, user));
         return MemoCreateDto.toDto(memo);
     }
 
