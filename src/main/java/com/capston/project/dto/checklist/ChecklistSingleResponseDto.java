@@ -14,9 +14,11 @@ import lombok.NoArgsConstructor;
 public class ChecklistSingleResponseDto {
 
     private String checklistResult;
+    private Integer checklistNumber;
 
-    public static ChecklistSingleResponseDto toDto(String checklistResult) {
+    public static ChecklistSingleResponseDto toDto(String checklistResult, Integer checklistNumber) {
         return new ChecklistSingleResponseDto(
-                checklistResult);
+                checklistResult,
+                checklistNumber);
     }
 }

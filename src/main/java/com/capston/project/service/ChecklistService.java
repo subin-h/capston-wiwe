@@ -43,7 +43,7 @@ public class ChecklistService {
                 resultString = "안전";
         }
         else throw new ChecklistNotFoundException();
-        return ChecklistSingleResponseDto.toDto(resultString);
+        return ChecklistSingleResponseDto.toDto(resultString, checklistNumber1);
     }
 
     @Transactional
@@ -67,7 +67,7 @@ public class ChecklistService {
                 resultString = "안전";
         }
         else throw new ChecklistNotFoundException();
-        return ChecklistSingleResponseDto.toDto(resultString);
+        return ChecklistSingleResponseDto.toDto(resultString, checklistNumber2);
     }
 
     @Transactional
@@ -91,13 +91,14 @@ public class ChecklistService {
                 resultString = "안전";
         }
         else throw new ChecklistNotFoundException();
-        return ChecklistSingleResponseDto.toDto(resultString);
+        return ChecklistSingleResponseDto.toDto(resultString, checklistNumber3);
     }
 
     @Transactional
     public ChecklistResponseDto getResult(){ //전체 체크리스트 결과 출력
+        User user = SecurityUtil.getCurrentUsername().flatMap(userRepository::findByUsername).orElse(null);
         ResultInfo resultInfo = resultInfoRepository.findById(resultChecklist()).orElseThrow(ChecklistNotFoundException::new);
-        return ChecklistResponseDto.toDto(resultInfo);
+        return ChecklistResponseDto.toDto(user, resultInfo);
     }
 
     @Transactional
