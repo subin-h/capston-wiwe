@@ -14,7 +14,6 @@ import lombok.NoArgsConstructor;
 public class ChecklistResponseDto {
 
     private String userNickname;
-
     private String result;
     private String result2;
     private String result3;

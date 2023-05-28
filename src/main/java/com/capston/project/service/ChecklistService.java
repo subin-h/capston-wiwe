@@ -32,6 +32,7 @@ public class ChecklistService {
         User user = SecurityUtil.getCurrentUsername().flatMap(userRepository::findByUsername).orElse(null);
         Integer checklistNumber1 = user.getChecklistSum1();
         String resultString;
+        String checklistNumberResult = checklistNumber1.toString();
         if(checklistNumber1 != null) {
             if (checklistNumber1 >= 16) {
                 resultString = "위험";
@@ -43,7 +44,7 @@ public class ChecklistService {
                 resultString = "안전";
         }
         else throw new ChecklistNotFoundException();
-        return ChecklistSingleResponseDto.toDto(resultString, checklistNumber1);
+        return ChecklistSingleResponseDto.toDto(resultString, checklistNumberResult);
     }
 
     @Transactional
@@ -58,6 +59,7 @@ public class ChecklistService {
         User user = SecurityUtil.getCurrentUsername().flatMap(userRepository::findByUsername).orElse(null);
         Integer checklistNumber2 = user.getChecklistSum2();
         String resultString;
+        String checklistNumberResult = checklistNumber2.toString();
         if(checklistNumber2 != null) {
             if (checklistNumber2 >= 7) {
                 resultString = "위험";
@@ -67,7 +69,7 @@ public class ChecklistService {
                 resultString = "안전";
         }
         else throw new ChecklistNotFoundException();
-        return ChecklistSingleResponseDto.toDto(resultString, checklistNumber2);
+        return ChecklistSingleResponseDto.toDto(resultString, checklistNumberResult);
     }
 
     @Transactional
@@ -82,6 +84,7 @@ public class ChecklistService {
         User user = SecurityUtil.getCurrentUsername().flatMap(userRepository::findByUsername).orElse(null);
         Integer checklistNumber3 = user.getChecklistSum3();
         String resultString;
+        String checklistNumberResult = checklistNumber3.toString();
         if (checklistNumber3 != null) {
             if (checklistNumber3 >= 10)
                 resultString = "위험";
@@ -91,7 +94,7 @@ public class ChecklistService {
                 resultString = "안전";
         }
         else throw new ChecklistNotFoundException();
-        return ChecklistSingleResponseDto.toDto(resultString, checklistNumber3);
+        return ChecklistSingleResponseDto.toDto(resultString, checklistNumberResult);
     }
 
     @Transactional
@@ -111,40 +114,64 @@ public class ChecklistService {
         if(resultCheck1 == null || resultCheck2 == null || resultCheck3 == null) {
             throw new ChecklistNotFoundException();
         }
-        if (resultCheck1>=16){
+        if (resultCheck1>=16 && resultCheck2>=7 && resultCheck3>=10 ){
             checkNumber = 1L;
-        } else if (resultCheck1>=8 && resultCheck2>=7 && resultCheck3>=10) {
+        } else if (resultCheck1>=16 && resultCheck2>=7 && resultCheck3>=5) {
             checkNumber = 2L;
-        } else if (resultCheck1>=8 && resultCheck2>=7 && resultCheck3>=0) {
+        } else if (resultCheck1>=16 && resultCheck2>=7 && resultCheck3>=0) {
             checkNumber = 3L;
-        } else if (resultCheck1>=8 && resultCheck2>=4 && resultCheck3>=10) {
+        } else if (resultCheck1>=16 && resultCheck2>=4 && resultCheck3>=10) {
             checkNumber = 4L;
-        } else if (resultCheck1>=8 && resultCheck2>=4 && resultCheck3>=0) {
+        } else if (resultCheck1>=16 && resultCheck2>=4 && resultCheck3>=5) {
             checkNumber = 5L;
-        } else if (resultCheck1>=8 && resultCheck2>=0 && resultCheck3>=10) {
+        } else if (resultCheck1>=16 && resultCheck2>=4 && resultCheck3>=0) {
             checkNumber = 6L;
-        }  else if (resultCheck1>=8 && resultCheck2>=0 && resultCheck3>=0) {
+        } else if (resultCheck1>=16 && resultCheck2>=0 && resultCheck3>=10) {
             checkNumber = 7L;
-        } else if (resultCheck1>=4 && resultCheck2>=7 && resultCheck3>=10) {
+        } else if (resultCheck1>=16 && resultCheck2>=0 && resultCheck3>=5) {
             checkNumber = 8L;
-        } else if (resultCheck1>=4 && resultCheck2>=7 && resultCheck3>=0) {
+        } else if (resultCheck1>=16 && resultCheck2>=0 && resultCheck3>=0) {
             checkNumber = 9L;
-        } else if (resultCheck1>=4 && resultCheck2>=4 && resultCheck3>=10) {
+        } else if (resultCheck1>=8 && resultCheck2>=7 && resultCheck3>=10) {
             checkNumber = 10L;
-        } else if (resultCheck1>=4 && resultCheck2>=4 && resultCheck3>=0) {
-            checkNumber =11L;
-        } else if (resultCheck1>=4 && resultCheck2>=0 && resultCheck3>=10) {
+        } else if (resultCheck1>=8 && resultCheck2>=7 && resultCheck3>=5) {
+            checkNumber = 11L;
+        } else if (resultCheck1>=8 && resultCheck2>=7 && resultCheck3>=0) {
             checkNumber = 12L;
-        } else if (resultCheck1>=4 && resultCheck2>=0 && resultCheck3>=0) {
+        } else if (resultCheck1>=8 && resultCheck2>=4 && resultCheck3>=10) {
             checkNumber = 13L;
-        } else if (resultCheck1>=0 && resultCheck2>=7) {
+        } else if (resultCheck1>=8 && resultCheck2>=4 && resultCheck3>=5) {
             checkNumber = 14L;
-        } else if (resultCheck1>=0 && resultCheck2>=4) {
+        } else if (resultCheck1>=8 && resultCheck2>=4 && resultCheck3>=0) {
             checkNumber = 15L;
-        } else if (resultCheck1>=0 && resultCheck2>=0) {
+        } else if (resultCheck1>=8 && resultCheck2>=0 && resultCheck3>=10) {
             checkNumber = 16L;
-        } else
+        } else if (resultCheck1>=8 && resultCheck2>=0 && resultCheck3>=5) {
             checkNumber = 17L;
+        } else if (resultCheck1>=8 && resultCheck2>=0 && resultCheck3>=0) {
+            checkNumber = 18L;
+        } else if (resultCheck1>=3 && resultCheck2>=7 && resultCheck3>=10) {
+            checkNumber = 19L;
+        } else if (resultCheck1>=3 && resultCheck2>=7 && resultCheck3>=5) {
+            checkNumber = 20L;
+        } else if (resultCheck1>=3 && resultCheck2>=7 && resultCheck3>=0) {
+            checkNumber = 21L;
+        } else if (resultCheck1>=3 && resultCheck2>=4 && resultCheck3>=10) {
+            checkNumber = 22L;
+        } else if (resultCheck1>=3 && resultCheck2>=4 && resultCheck3>=5) {
+            checkNumber = 23L;
+        } else if (resultCheck1>=3 && resultCheck2>=4 && resultCheck3>=0) {
+            checkNumber = 24L;
+        } else if (resultCheck1>=3 && resultCheck2>=0 && resultCheck3>=10) {
+            checkNumber = 25L;
+        } else if (resultCheck1>=3 && resultCheck2>=0 && resultCheck3>=5) {
+            checkNumber = 26L;
+        } else if (resultCheck1>=3 && resultCheck2>=0 && resultCheck3>=0) {
+            checkNumber = 27L;
+        } else if (resultCheck1>=0) {
+            checkNumber = 28L;
+        } else
+            checkNumber = 29L;
 
         return checkNumber;
     }
