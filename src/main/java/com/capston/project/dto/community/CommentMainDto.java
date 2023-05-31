@@ -14,9 +14,10 @@ public class CommentMainDto {
 
     private Long commentId;
     private String commentContent;
+    private Long boardsId;
 
-    public CommentMainDto toDto(Comment comment) {
-        return new CommentMainDto(comment.getCommentId(), comment.getCommentContent());
+    public CommentMainDto toDto(Comment comment ) {
+        return new CommentMainDto(comment.getCommentId(), comment.getCommentContent(), comment.getBoards().getBoardsId());
     }
 
 }
