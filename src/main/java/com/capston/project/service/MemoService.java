@@ -23,7 +23,10 @@ import java.io.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+
+import static java.util.stream.Collectors.toList;
 
 @RequiredArgsConstructor
 @Service
@@ -46,9 +49,10 @@ public class MemoService {
     public List<MemoMainDto> findAllMemo() { // 메모 전체 조회
         User user = SecurityUtil.getCurrentUsername().flatMap(userRepository::findByUsername).orElse(null);
         List<Memo> memo = memoRepository.findByUserUserId(user.getUserId());
-        List<MemoMainDto> memoMainDtoList = new ArrayList<>();
-        memo.stream().forEach(i -> memoMainDtoList.add(new MemoMainDto().toDto(i)));
-        return memoMainDtoList;
+        return  memo.stream()
+                .sorted(Comparator.comparing(Memo::getMemoDate)) // memoDate 내림차순 정렬
+                .map(MemoMainDto::toDto)
+                .collect(toList());
     }
 
     @Transactional(readOnly = true)
@@ -61,6 +65,7 @@ public class MemoService {
         memo.stream().forEach(i -> memoMainDtoList.add(new MemoMainDto().toDto(i)));
         return memoMainDtoList;
     }
+
 
     @Transactional
     public void deleteMemo(Long id) { //메모 삭제

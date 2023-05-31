@@ -20,7 +20,7 @@ public class MemoMainDto {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDateTime memoDatetime;
 
-    public MemoMainDto toDto(Memo memo) {
+    public static MemoMainDto toDto(Memo memo) {
         return new MemoMainDto(memo.getMemoId(), memo.getMemoTitle(),memo.getMemoDate());
     }
 }
