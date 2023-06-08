@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Lob;
 import java.time.LocalDateTime;
 
 @Data
@@ -17,7 +18,9 @@ public class MemoResponseDto {
 
     private Long memoId;
     private String memoTitle;
+    @Lob
     private String memoContent1;
+    @Lob
     private String memoContent2;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd") //local datetime yyyy-MM-dd 형식으로 직렬화하여 전송

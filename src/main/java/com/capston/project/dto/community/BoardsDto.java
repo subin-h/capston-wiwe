@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Lob;
 import java.time.LocalDateTime;
 
 @Data
@@ -15,6 +16,8 @@ public class BoardsDto {
     private Long boardsId;
     private String boardsWriter;
     private String boardsTitle;
+
+    @Lob
     private String boardsContent;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime boardsDate;
