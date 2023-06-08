@@ -17,6 +17,8 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Entity
 @Table(name = "memo")
+/*Sprint boot - 카멜 표기법, Mysql = Snake 표기법 권장으로 인하여
+테이블의 이름은 Snake 표기법으로 변경하여 저장*/
 public class Memo extends Auditor {
 
     @Id
@@ -27,9 +29,11 @@ public class Memo extends Auditor {
     @Column(name = "memo_title", nullable = false)
     private String memoTitle;
 
+    @Lob //MySql에 data를 대용량 저장 가능
     @Column(name = "memo_content1",nullable = false)
     private String memoContent1;
 
+    @Lob //MySql에 data를 대용량 저장 가능
     @Column(name = "memo_content2",nullable = false)
     private String memoContent2;
 

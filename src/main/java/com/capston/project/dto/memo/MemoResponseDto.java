@@ -20,7 +20,7 @@ public class MemoResponseDto {
     private String memoContent1;
     private String memoContent2;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd") //local datetime yyyy-MM-dd 형식으로 직렬화하여 전송
     private LocalDateTime memoDatetime;
 
     public static MemoResponseDto toDto(Memo memo) {

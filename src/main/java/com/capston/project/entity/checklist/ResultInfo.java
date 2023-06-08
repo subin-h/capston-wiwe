@@ -12,6 +12,8 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Entity
+/*Sprint boot - 카멜 표기법, Mysql = Snake 표기법 권장으로 인하여
+테이블의 이름은 Snake 표기법으로 변경하여 저장*/
 @Table(name = "result_info")
 public class ResultInfo {
 
@@ -19,15 +21,15 @@ public class ResultInfo {
     @Column(name = "result_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long resultId;
-    @Lob
+    @Lob //MySql에 data를 대용량 저장 가능
     @Column(name = "result", nullable = false)
     private String result;
 
-    @Lob
+    @Lob //MySql에 data를 대용량 저장 가능
     @Column(name = "result2", nullable = false)
     private String result2;
 
-    @Lob
+    @Lob //MySql에 data를 대용량 저장 가능
     @Column(name = "result3", nullable = false)
     private String result3;
 

@@ -15,18 +15,18 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class SignUpRequestDto {
 
-    @NotBlank(message = "아이디를 입력해주세요.")
+    @NotBlank(message = "아이디를 입력해주세요.") //null 시 request error
     private String username;
 
-    @NotBlank(message = "비밀번호를 입력해주세요.")
+    @NotBlank(message = "비밀번호를 입력해주세요.") //null 시 request error
     private String password;
 
-    @NotBlank(message = "사용자 이름을 입력해주세요.")
-    @Size(min = 2, message = "사용자 이름이 너무 짧습니다.")
+    @NotBlank(message = "사용자 이름을 입력해주세요.") //null 시 request error
+    @Size(min = 2, message = "사용자 이름이 너무 짧습니다.") // 최소 두 글자 이상
     private String name;
 
 
-    @NotBlank(message = "닉네임을 입력해주세요.")
-    @Size(min = 2, message = "닉네임이 너무 짧습니다.")
+    @NotBlank(message = "닉네임을 입력해주세요.") //null 시 request error
+    @Size(min = 2, message = "닉네임이 너무 짧습니다.") // 최소 두 글자 이상
     private String nickname;
 }

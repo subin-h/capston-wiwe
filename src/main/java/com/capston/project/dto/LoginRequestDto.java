@@ -19,10 +19,10 @@ import com.capston.project.entity.user.User;
 public class LoginRequestDto {
 
 
-    @NotBlank(message = "{LoginRequestDto.username.notBlank}")
+    @NotBlank(message = "{LoginRequestDto.username.notBlank}") //null 시 request error
     private String username;
 
-    @NotBlank(message = "{LoginRequestDto.password.notBlank}")
+    @NotBlank(message = "{LoginRequestDto.password.notBlank}") //null 시 request error
     private String password;
 
     public User touser(PasswordEncoder passwordEncoder) {
@@ -32,7 +32,7 @@ public class LoginRequestDto {
                 .authority(Authority.ROLE_USER)
                 .build();
     }
-    public UsernamePasswordAuthenticationToken toAuthentication() {
+    public UsernamePasswordAuthenticationToken toAuthentication() { //로그인 시 username, password 관한 accessToken 발급
         return new UsernamePasswordAuthenticationToken(username, password);
     }
 }

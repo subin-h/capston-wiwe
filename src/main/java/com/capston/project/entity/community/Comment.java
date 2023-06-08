@@ -14,6 +14,8 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Entity
+/*Sprint boot - 카멜 표기법, Mysql = Snake 표기법 권장으로 인하여
+테이블의 이름은 Snake 표기법으로 변경하여 저장*/
 @Table(name = "comment")
 public class Comment extends Auditor {
     @Id

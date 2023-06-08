@@ -17,7 +17,7 @@ public class MemoMainDto {
 
     private Long memoId;
     private String title;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd") //local datetime yyyy-MM-dd 형식으로 직렬화하여 전송
     private LocalDateTime memoDatetime;
 
     public static MemoMainDto toDto(Memo memo) {

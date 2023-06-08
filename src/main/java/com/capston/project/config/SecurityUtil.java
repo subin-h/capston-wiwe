@@ -24,7 +24,7 @@ public class SecurityUtil {
         }
 
         String username = null;
-        if (authentication.getPrincipal() instanceof UserDetails) {
+        if (authentication.getPrincipal() instanceof UserDetails) { //접속한 유저와 토큰이 일치하는지 확인하는 인가 과정
             UserDetails springSecurityUser = (UserDetails) authentication.getPrincipal();
             username = springSecurityUser.getUsername();
         } else if (authentication.getPrincipal() instanceof String) {

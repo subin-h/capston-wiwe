@@ -12,6 +12,6 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 public class ChecklistSum1RequestDto {
 
-    @NotNull(message = "체크리스트1번의 값을 입력해주세요.")
+    @NotNull(message = "체크리스트1번의 값을 입력해주세요.") //null 시 request error
     private Integer checklistSum1;
 }

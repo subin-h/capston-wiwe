@@ -22,14 +22,14 @@ import java.util.List;
 @Configuration
 @EnableWebMvc
 // http://localhost:8080/swagger-ui/index.html
-public class SwaggerConfig {
+public class SwaggerConfig { //swagger 설정
 
     @Bean
     public Docket api() {
-        return new Docket(DocumentationType.OAS_30)
+        return new Docket(DocumentationType.OAS_30) //swagger 3.0
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.capston.project"))
+                .apis(RequestHandlerSelectors.basePackage("com.capston.project")) //api 주소
                 .paths(PathSelectors.any())
                 .build()
                 .securityContexts(Arrays.asList(securityContext()))
@@ -44,6 +44,7 @@ public class SwaggerConfig {
                 .build();
     }
 
+    //swagger - jwt 핸들링 설정
     private static ApiKey apiKey() {
         return new ApiKey("Authorization", "Authorization", "header");
     }

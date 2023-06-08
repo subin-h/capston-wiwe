@@ -28,8 +28,8 @@ import java.util.stream.Collectors;
 public class TokenProvider {
 
     private static final String AUTHORITIES_KEY = "auth";
-    private static final String BEARER_TYPE = "bearer";
-    private static final long ACCESS_TOKEN_EXPIRE_TIME = 1000 * 60 * 60 * 24; // 1시간 * 24 = 24시간(-Dev)
+    private static final String BEARER_TYPE = "bearer"; //토큰 타입
+    private static final long ACCESS_TOKEN_EXPIRE_TIME = 1000 * 60 * 60 * 24; // 토큰 유효시간 1시간 * 24 = 24시간(-Dev)
 
     private final Key key;
 
@@ -83,7 +83,7 @@ public class TokenProvider {
         return new UsernamePasswordAuthenticationToken(principal, jwt, authorities);
     }
 
-    public boolean validateToken(String token) {
+    public boolean validateToken(String token) { //토큰 유효하지 않을 시, log error 발생
         try {
             Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
             return true;

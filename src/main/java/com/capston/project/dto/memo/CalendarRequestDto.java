@@ -11,6 +11,6 @@ import javax.validation.constraints.NotBlank;
 @NoArgsConstructor
 public class CalendarRequestDto {
 
-    @NotBlank(message = "메모가 저장된 날짜를 입력해주세요.")
+    @NotBlank(message = "메모가 저장된 날짜를 입력해주세요.") //null 시 request error
     private String memoDate;
 }

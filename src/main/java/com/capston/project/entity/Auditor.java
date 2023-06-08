@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 @EntityListeners(AuditingEntityListener.class)
 @MappedSuperclass
 @Getter
+// data 저장 시 생성시간, 수정시간을 SQL에 자동생성하여 저장
 public class Auditor {
 
     @CreatedDate

@@ -14,6 +14,8 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Entity
+/*Sprint boot - 카멜 표기법, Mysql = Snake 표기법 권장으로 인하여
+테이블의 이름은 Snake 표기법으로 변경하여 저장*/
 @Table(name = "boards")
 public class Boards extends Auditor {
 
@@ -24,6 +26,7 @@ public class Boards extends Auditor {
 
     @Column(name = "boards_title", nullable = false)
     private String boardsTitle;
+    @Lob //MySql에 data를 대용량 저장 가능
     @Column(name = "boards_content", nullable = false)
     private String boardsContent;
 
